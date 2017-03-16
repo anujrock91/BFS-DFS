@@ -1,0 +1,62 @@
+package Snippet;
+import java.util.Stack;
+
+public class TrappingRainWater {
+	
+	public int getTrapped(int mat[][]){
+		if(mat.length == 0){ return 0; }
+		if(mat.length < 3){ return 0; }
+		if(mat[0].length < 3){ return 0; }
+		int rows = mat.length;
+		int cols = mat[0].length;
+		
+		for(int col=2;col<cols-1;col++){
+			Stack <Integer> upperMax = new Stack<Integer>();
+			Stack <Integer> lowerMax = new Stack<Integer>();
+			for(int row=0;row<rows;row++){
+				int i = mat[row][col];
+				if(upperMax.isEmpty() || i >= mat[col][upperMax.peek()] ){
+					upperMax.push(row);
+				}
+			}
+			
+			for(int row=rows-1;row>0;row--){
+				int i = mat[row][col];
+				if(lowerMax.isEmpty() || i >= mat[col][lowerMax.peek()]){
+					lowerMax.push(row);
+				}
+			}
+			int upperIndex = upperMax.peek();
+			int lowerIndex = lowerMax.peek();
+			int upperWater = 0;
+			while(upperMax.size() != 1){
+				int currIndex = upperMax.pop();
+				int curr = mat[col][currIndex];
+				int next = mat[col][upperMax.peek()];
+				int maxWater = (next*(currIndex-upperMax.peek()-1));
+				for(int i=upperMax.peek()+1;i<currIndex;i++){
+					int height = mat[col][i];
+					maxWater -= height;
+				}
+				upperWater +=maxWater;
+			}
+			int lowerWater = 0;
+			while(lowerMax.size() != 1){
+				int currIndex = lowerMax.pop();
+				int curr = mat[col][currIndex];
+				int next = mat[col][lowerMax.peek()];
+				int maxWater = next*(lowerMax.peek()-currIndex-1);
+				for(int i=currIndex+1; i<lowerMax.peek();i++){
+					maxWater -= mat[col][i];
+				}
+				lowerWater +=maxWater;
+			}
+			
+			int middleWater = mat[col][upperIndex]*(lowerIndex-upperIndex-1);
+			for(int i=upperIndex+1; i<lowerIndex;i++){
+				middleWater 
+			}
+		}
+	}
+	
+}

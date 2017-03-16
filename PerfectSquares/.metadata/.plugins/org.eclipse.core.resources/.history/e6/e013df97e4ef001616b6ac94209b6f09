@@ -1,0 +1,8 @@
+package Snippet;
+
+public class PerfectSquares {
+	
+	public int getMinSquares(int num){
+		
+	}
+}

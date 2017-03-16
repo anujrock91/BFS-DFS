@@ -1,0 +1,19 @@
+package Snippet;
+
+public class PerfectSquares {
+	
+	public int getMinSquares(int num){
+		int n = (int)Math.sqrt(num);
+		
+	}
+	
+	
+	private void getMin(int n, int index, int level, int sum, int target){
+		for(int i=index;i<=n;i++){
+			sum +=(i*i);
+			if(sum > target){ break; }
+			if(sum==target){  min = Math.min(level, min); }
+			sum -=(i*i);
+		}
+	}
+}

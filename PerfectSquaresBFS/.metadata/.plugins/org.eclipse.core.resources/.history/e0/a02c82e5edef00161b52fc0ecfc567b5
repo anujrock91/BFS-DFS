@@ -1,0 +1,33 @@
+package Snippet;
+import java.util.LinkedList;
+
+public class GetMinSquares {
+	
+	public int getMin(int n){
+		int num = (int)Math.sqrt(n);
+		LinkedList<Integer> que = new LinkedList<>();
+		que.addFirst(0);
+		
+		for(int i=1;i<=num;i++){
+			que.addLast(i*i); 
+		}
+		
+		que.addLast(0);
+		int count = 0;
+		while(!que.isEmpty()){
+			int curr = que.removeFirst();
+			if(curr == 0){
+				++count;
+			}
+			else{
+				if(curr == n){ return count; }
+				else{
+					for(int i=1;i<=num;i++){
+						que.addLast((i*i)+curr);
+					}
+				}
+			}
+		}
+		return n;
+	}
+}

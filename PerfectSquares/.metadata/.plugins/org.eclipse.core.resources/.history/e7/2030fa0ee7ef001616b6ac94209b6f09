@@ -1,0 +1,30 @@
+package Snippet;
+
+public class PerfectSquares {
+	
+	int min = Integer.MAX_VALUE;
+	
+	public int getMinSquares(int n){
+		int num = (int)Math.sqrt(n);
+		getMin(num,1,1,0,n);
+		return min;
+	}
+	
+	
+	private void getMin(int n, int index, int level, int sum, int target){
+		for(int i=index;i<=n;i++){
+			sum +=(i*i);
+			if(sum > target){ break; }
+			if(sum==target){
+				System.out.println(sum + " : " + i);
+				min = Math.min(level, min); break; 
+			}
+			getMin(n,i,level+1,sum,target);
+			sum -=(i*i);
+		}
+	}
+	
+	public static void main(String args[]){
+		System.out.println(new PerfectSquares().getMinSquares(273));
+	}
+}

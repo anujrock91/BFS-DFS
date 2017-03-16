@@ -1,0 +1,36 @@
+package Snippet;
+
+public class SurroundedRegions {
+	
+	
+	public int[][] surround(char mat[][]){
+		
+		for(int col=0;col<mat[0].length;col++){
+			if(mat[0][col] == '0'){
+				
+			}
+		}
+	}
+	
+	
+	public void DFS(int row, int col, char [][] mat){
+		if(row<0 && row>=mat.length){
+			return;
+		}
+		if(col<0 && col>=mat[0].length){
+			return;
+		}
+		if(mat[row][col] == 'X'){
+			return;
+		}
+		if(mat[row][col] == '#'){ 
+			return; 
+		}
+		mat[row][col] = '#';
+		DFS(row+1,col, mat);
+		DFS(row-1,col, mat);
+		DFS(row,col+1, mat);
+		DFS(row,col-1, mat);
+		
+	}
+}

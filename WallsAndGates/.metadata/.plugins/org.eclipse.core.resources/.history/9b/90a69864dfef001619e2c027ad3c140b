@@ -1,0 +1,63 @@
+package Snippet;
+
+public class WallsAndGates {
+
+	public int[][] getGates(int [][] mat){
+		int distance[][] = new int[mat.length][mat[0].length];
+		for(int row=0;row<mat.length;row++){
+			for(int col=0;col<mat[0].length;col++){
+				if(mat[row][col] == Integer.MAX_VALUE){
+					DFS(mat, row, col, distance);
+				}
+				else{
+					//distance[row][col] = mat[row][col];
+				}
+			}
+		}
+		return distance;
+	}
+	
+	private int DFS(int[][] mat, int row, int col, int[][] distance){
+		if(row<0 || row>=mat.length){
+			return Integer.MAX_VALUE;
+		}
+		if(col<0 || col >=mat[0].length){
+			return Integer.MAX_VALUE;
+		}
+		if(mat[row][col] == -1){
+			return Integer.MAX_VALUE;
+		}
+		if(mat[row][col] == 0){
+			return 1;
+		}
+		if(mat[row][col] == Integer.MIN_VALUE){//Visited
+			return (distance[row][col]==0)?Integer.MAX_VALUE:distance[row][col];
+		}
+		mat[row][col] = Integer.MIN_VALUE;
+		int d1 = DFS(mat, row+1, col, distance);
+		int d2 = DFS(mat, row-1, col, distance);
+		int d3 = DFS(mat, row, col+1, distance);
+		int d4 = DFS(mat, row, col-1, distance);
+		int minD = Math.min(Math.min(d1, d2), Math.min(d3, d4));
+		distance[row][col] = minD+1;
+		return minD+1;
+	}
+	
+	
+	public static void main(String args[]){
+		int[][]mat= new int[][]{
+			{Integer.MAX_VALUE, -1, 0, Integer.MAX_VALUE},
+			{Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE, -1},
+			{Integer.MAX_VALUE, -1, Integer.MAX_VALUE, -1},
+			{0, -1, Integer.MAX_VALUE, Integer.MAX_VALUE}
+		};
+		
+		int[][] d = new WallsAndGates().getGates(mat);
+		for(int row[]: d){
+			for(int i: row){
+				System.out.print(i+" | ");
+			}
+			System.out.println();
+		}
+	}
+}

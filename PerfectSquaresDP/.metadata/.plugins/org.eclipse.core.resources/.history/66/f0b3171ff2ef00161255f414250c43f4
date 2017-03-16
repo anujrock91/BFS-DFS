@@ -1,0 +1,10 @@
+package Snippet;
+
+public class PerfectSquares {
+	
+	public int minSquares(int n){
+		int num = (int)Math.sqrt(n);
+		
+		
+	}
+}
